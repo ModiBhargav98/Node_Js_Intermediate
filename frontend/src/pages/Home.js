@@ -1,14 +1,24 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import CustemerService from "../CourseServices/productManagement";
+
 export default function Home(props) {
+ const handleLogin = () => {
+   console.log("hello")
+  CustemerService.LoginAndSignup().then((res)=> {
+    console.log(res.data)
+  }).catch(err => console.log(err))
+ }
+
   return (
     <div className="container mt-3">
-        <div className="d-flex justify-content-end">
-           <button className="btn btn-info text-white"><Link to="/login">LogIn</Link></button>
-           <button className="btn btn-info text-white mx-2"><Link to="/login">SignUp</Link></button>
-           <button className="btn btn-info text-white mx-2"><Link to="/uploadeFile">UploadeFile</Link></button>
-           <button className="btn btn-info text-white mx-2"><Link to="/productData">Products</Link></button>
+      <div className="text-center">
+        <div className="ms-2">Login or Signup</div>
+        <div>
+          <a href="http://localhost:4001/google/" onClick={(e) => {
+            handleLogin()
+          }}>Google</a>
         </div>
+      </div>
     </div>
-  )
+  );
 }

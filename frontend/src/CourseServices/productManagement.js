@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const PRODUCT_URL = "http://localhost:4001/product/";
+const LOGIN_URL = "http://localhost:4001/google/";
 
 class CustomerService {
   getAllProudct() {
@@ -20,6 +21,10 @@ class CustomerService {
   }
   DeleteProudct(productId) {
     return axios.delete(PRODUCT_URL + productId);
+  }
+  LoginAndSignup() {
+    console.log("gfhgfgh")
+    return axios.get(LOGIN_URL);
   }
 }
 export default new CustomerService();
