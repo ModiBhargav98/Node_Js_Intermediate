@@ -2,28 +2,33 @@ var nodemailer = require("nodemailer");
 
 async function sendMail(subject, to, mailText) {
   var transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "mail.mailtest.radixweb.net",
+    port: 25,
+    secure: false, // use SSL
     auth: {
-      user: "modibhargav1998@gmail.com",
-      pass: "Papa@9652",
+      user: "testdotnet@mailtest.radixweb.net", // generated ethereal user
+      pass: "deep70", // enter password here
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   });
 
   try {
     const sent = await transporter.sendMail({
-      from: "modibhargav1998@gmail.com",
+      from: "testdotnet@mailtest.radixweb.net",
       to: to,
       subject: subject,
       html: mailText,
     });
     if (sent) {
-        return {success: true}
+      return { success: true };
     } else {
-        return {success: false, username:"hgcgfd"}
+      return { success: false, username: "hgcgfd" };
     }
   } catch (err) {
-      return {success: false, username:"fdgfdgfdg"}
+    return { success: false, username: "fdgfdgfdg" };
   }
 }
 
-module.exports = sendMail
+module.exports = sendMail;

@@ -8,7 +8,6 @@ const s3 = new AWS.S3({
 });
 
 exports.uploadeFiles = catchAsyncError(async (req, res, next) => {
-  console.log(req.files.file);
   const file = req.files.file[0];
   fs.readFile(file.path, (err, data) => {
     console.log("gfgn", data);
@@ -21,27 +20,11 @@ exports.uploadeFiles = catchAsyncError(async (req, res, next) => {
     s3.upload(params, function (s3Err, data) {
       if (s3Err) throw s3Err;
       console.log(`File uploaded successfully at ${data.Location}`);
-      const pathToFile = "./public/files/"+ file.filename
+      const pathToFile = "./public/files/" + file.filename;
       if (fs.existsSync(pathToFile)) {
-        fs.unlinkSync(pathToFile)
+        fs.unlinkSync(pathToFile);
       }
-      res.status(200).send("file is uploaded")
+      res.status(200).send("file is uploaded");
     });
   });
-  // const fileContent = fs.readFileSync();
-  // console.log()
-  // Setting up S3 upload parameters
-  // const params = {
-  //     Bucket: BUCKET_NAME,
-  //     Key: '', // File name you want to save as in S3
-  //     Body: fileContent
-  // };
-
-  // // Uploading files to the bucket
-  // s3.upload(params, function(err, data) {
-  //     if (err) {
-  //         throw err;
-  //     }
-  //     console.log(`File uploaded successfully. ${data.Location}`);
-  // });
 });
